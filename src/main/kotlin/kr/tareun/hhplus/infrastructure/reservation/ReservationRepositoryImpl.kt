@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository
 
 @Repository
 class ReservationRepositoryImpl(private val jpaRepository: ReservationJpaRepository): ReservationRepository {
+    override fun existsByUserIdAndLectureId(userId: Long, lectureId: Long): Boolean = jpaRepository.existsByUserIdAndLectureId(userId, lectureId)
+
     override fun getAllReservationsByUserId(userId: Long): List<Reservation> = jpaRepository.getAllByUserId(userId)
 
     override fun save(reservation: Reservation): Reservation = jpaRepository.save(reservation)

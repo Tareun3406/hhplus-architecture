@@ -15,6 +15,13 @@ class ReservationService(
     // 특강 신청
     fun reserveLecture(lectureId: Long, userId: Long): ReservationResponse {
         val lecture = lectureRepository.getLecture(lectureId)
+
+        if (reservationRepository.existsByUserIdAndLectureId(userId, lectureId)) {
+            throw IllegalArgumentException("이미 예약한 특강입니다.")
+        } else if (lecture.reservedCounts >= lecture.maxReservation) {
+            throw IllegalArgumentException("신청 마감 되었습니다.")
+        }
+
         lecture.addReservedCounts()
         return reservationMapper.toReservationResponse(reservationRepository.save(Reservation(null, userId, lecture)))
     }
