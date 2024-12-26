@@ -42,7 +42,7 @@ class ReservationServiceUnitTest {
         val reservation = Reservation(1, userId, lecture)
 
         `when`(reservationRepository.existsByUserIdAndLectureId(userId, lectureId)).thenReturn(false)
-        `when`(lectureRepository.getLecture(lectureId)).thenReturn(lecture)
+        `when`(lectureRepository.getLectureForUpdate(lectureId)).thenReturn(lecture)
         `when`(reservationRepository.save(any())).thenReturn(reservation)
 
         // when
@@ -78,7 +78,7 @@ class ReservationServiceUnitTest {
         val lectureId = 1L
         val lecture = Lecture(1L, "강의1", "강연자1", LocalDateTime.now(), LocalDateTime.now().plusHours(1), 30)
 
-        `when`(lectureRepository.getLecture(lectureId)).thenReturn(lecture)
+        `when`(lectureRepository.getLectureForUpdate(lectureId)).thenReturn(lecture)
         `when`(reservationRepository.existsByUserIdAndLectureId(1L, 1L)).thenReturn(true)
 
         // when - then
@@ -94,7 +94,7 @@ class ReservationServiceUnitTest {
         val lectureId = 1L
         val lecture = Lecture(1L, "강의1", "강연자1", LocalDateTime.now(), LocalDateTime.now().plusHours(1), 30)
 
-        `when`(lectureRepository.getLecture(lectureId)).thenReturn(lecture)
+        `when`(lectureRepository.getLectureForUpdate(lectureId)).thenReturn(lecture)
         `when`(reservationRepository.existsByUserIdAndLectureId(userId, lectureId)).thenReturn(false)
 
         // when - then

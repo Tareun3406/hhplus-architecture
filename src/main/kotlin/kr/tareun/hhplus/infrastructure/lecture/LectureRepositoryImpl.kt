@@ -11,6 +11,7 @@ import java.time.LocalTime
 class LectureRepositoryImpl(private val jpaRepository: LectureJpaRepository): LectureRepository {
 
     override fun getLecture(lectureId: Long): Lecture = jpaRepository.getReferenceById(lectureId)
+    override fun getLectureForUpdate(lectureId: Long): Lecture = jpaRepository.getByIdWithWriteLock(lectureId)
 
     override fun getAllLecturesByDate(date: LocalDate): List<Lecture> {
         val startDateTime = LocalDateTime.of(date, LocalTime.MIN)

@@ -5,5 +5,6 @@ import java.time.LocalDate
 interface LectureRepository {
     fun save(lecture: Lecture): Lecture
     fun getLecture(lectureId: Long): Lecture
+    fun getLectureForUpdate(lectureId: Long): Lecture
     fun getAllLecturesByDate(date: LocalDate): List<Lecture>
 }
